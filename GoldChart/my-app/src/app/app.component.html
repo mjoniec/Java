@@ -1,0 +1,15 @@
+<jqxChart (onRangeSelectionChanging)="chartChange($event)"
+          [width]="getWidth()" [height]="500"
+          [title]="'Tesla Motors Stock Price'"
+          [description]="'(June 2010 - March 2018)'"
+          [enableCrosshairs]="true" [enableAnimations]="true" [padding]="padding" [xAxis]="xAxis"
+          [titlePadding]="titlePadding" [source]="dataAdapter" [animationDuration]="1500"
+          [valueAxis]="valueAxis" [seriesGroups]="seriesGroups" [colorScheme]="'scheme01'">
+</jqxChart>
+
+<!--<jqxGrid [theme]="'material'"
+         [width]="850" [source]="dataAdapter" [columns]="columns"
+         [pageable]="true" [autoheight]="true" [sortable]="true"
+         [altrows]="true" [enabletooltips]="true" [editable]="true"
+         [selectionmode]="'multiplecellsadvanced'" [columngroups]="columngroups">
+</jqxGrid>-->
