@@ -8,10 +8,20 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+What you need to install before run the software
 
 ```
-Give examples
+.NET Core
+
+Node.js, npm
+https://nodejs.org/en/download/
+
+jqx
+npm install -g create-jqwidgets-angular-app
+https://www.jqwidgets.com/jquery-widgets-documentation/documentation/package-managers/npm-tutorial.htm
+
+"#" can not be in local path else angular app will not launch
+
 ```
 
 ### Installing
