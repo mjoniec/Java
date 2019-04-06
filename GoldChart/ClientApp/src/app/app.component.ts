@@ -1,22 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html'
 })
+
 export class AppComponent {
+    public forecasts: WeatherForecast[];
+
+    constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+        http.get<WeatherForecast[]>(baseUrl + 'api/GoldData/WeatherForecasts').subscribe(result => {
+            this.forecasts = result;
+        }, error => console.error(error));
+    }
+
     source: any =
         {
-            datatype: 'csv',
+            //datatype: 'csv',
+            datatype: 'json',
             datafields: [
                 { name: 'Date' },
-                { name: 'Open' },
-                { name: 'High' },
-                { name: 'Low' },
-                { name: 'Close' },
-                { name: 'Volume' },
-                { name: 'AdjClose' }
+                { name: 'Open' }
             ],
-            url: '../assets/TSLA_stockprice.csv'
+            //url: '../assets/TSLA_stockprice.csv'
+            url: '../assets/TSLA_stockprice.json'
         };
     getWidth(): any {
         if (document.body.offsetWidth < 850) {
@@ -87,4 +95,11 @@ export class AppComponent {
         let args = event.args;
         args.instance.description = args.minValue.getFullYear() + " - " + args.maxValue.getFullYear();
     }
+}
+
+interface WeatherForecast {
+    dateFormatted: string;
+    temperatureC: number;
+    temperatureF: number;
+    summary: string;
 }
