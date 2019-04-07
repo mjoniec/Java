@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -46,7 +47,13 @@ namespace GoldChart.Controllers
                 //}
             };
 
-            foreach(var g in GetAll())
+            var task = GetAll2Async();
+            task.Wait();
+            var allPrices = task.Result;
+
+            //var allPrices = GetAll();
+
+            foreach (var g in allPrices)
             {
                 var array = g.Split(',');
                 var r = float.TryParse(array[1], NumberStyles.Any, CultureInfo.InvariantCulture, out var f);
@@ -61,6 +68,28 @@ namespace GoldChart.Controllers
             var s = JsonConvert.SerializeObject(gold, Formatting.None);
 
             return s;
+        }
+
+        private async Task<IEnumerable<string>> GetAll2Async()
+        {
+            var list = new List<string>();
+
+            var client = HttpClientFactory.Create();
+            var httpResponse = await client.GetAsync("https://localhost:44350/api/Gold");
+            var body = await httpResponse.Content.ReadAsStringAsync();
+            var b = ushort.TryParse(body, out var id);
+
+            if (!b) return null;
+
+            System.Threading.Thread.Sleep(3000);
+
+            var httpResponse2 = await client.GetAsync("https://localhost:44350/api/Gold/GetAll/" + id.ToString());
+            var body2 = await httpResponse2.Content.ReadAsStringAsync();
+
+            
+            var r = JsonConvert.DeserializeObject<string[]>(body2);
+
+            return r;
         }
 
         private IEnumerable<string> GetAll()
