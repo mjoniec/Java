@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace GoldChart.Controllers
 {
@@ -22,18 +23,46 @@ namespace GoldChart.Controllers
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             });
-
-            //[["1971-07-01",35.7],["1971-04-01",34.6]]
         }
 
-        [DataContract]
-        internal class GoldData
+        [HttpGet("[action]")]
+        public string GoldDaily()
         {
-            [DataMember]
+            var gold = new Gold
+            {
+                goldData = new List<GoldDataDay>
+                {
+                    new GoldDataDay
+                    {
+                        Date = "2010-6-29",
+                        Open = (float)15.89
+                    },
+                    new GoldDataDay
+                    {
+                        Date = "2010-6-30",
+                        Open = (float)25.73
+                    }
+                }
+            };
+
+            var s = JsonConvert.SerializeObject(gold, Formatting.None);
+
+            return s;
+        }
+
+        internal class Gold
+        {
+            [JsonProperty("goldData")]
+            internal List<GoldDataDay> goldData;
+        }
+
+        internal class GoldDataDay
+        {
+            [JsonProperty("Date")]
             internal string Date;
 
-            [DataMember]
-            internal string Open;
+            [JsonProperty("Open")]
+            internal float Open;
         }
 
         //// GET: api/GoldData
