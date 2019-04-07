@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
@@ -30,24 +31,47 @@ namespace GoldChart.Controllers
         {
             var gold = new Gold
             {
-                goldData = new List<GoldDataDay>
-                {
-                    new GoldDataDay
-                    {
-                        Date = "2010-6-29",
-                        Open = (float)15.89
-                    },
-                    new GoldDataDay
-                    {
-                        Date = "2010-6-30",
-                        Open = (float)25.73
-                    }
-                }
+                goldData = new List<GoldDataDay>()
+                //{
+                //    new GoldDataDay
+                //    {
+                //        Date = "2010-6-29",
+                //        Open = (float)15.89
+                //    },
+                //    new GoldDataDay
+                //    {
+                //        Date = "2010-6-30",
+                //        Open = (float)25.73
+                //    }
+                //}
             };
+
+            foreach(var g in GetAll())
+            {
+                var array = g.Split(',');
+                var r = float.TryParse(array[1], NumberStyles.Any, CultureInfo.InvariantCulture, out var f);
+
+                gold.goldData.Add(new GoldDataDay
+                {
+                    Date = array[0],
+                    Open = f
+                });
+            }
 
             var s = JsonConvert.SerializeObject(gold, Formatting.None);
 
             return s;
+        }
+
+        private IEnumerable<string> GetAll()
+        {
+            var list = new List<string>
+            {
+                "2010-6-29,15.9",
+                "2010-6-30,25.9"
+            };
+
+            return list;
         }
 
         internal class Gold
