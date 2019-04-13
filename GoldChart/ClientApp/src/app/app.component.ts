@@ -8,7 +8,6 @@ import { HttpClient } from '@angular/common/http';
 
 export class AppComponent {
     _goldData: string;
-    _data = { "goldData": [{ "Date": "1971-4-1", "Open": 15.89 }, { "Date": "2019-4-5", "Open": 25.73 }] };
 
     constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
         http.get<string>(baseUrl + 'api/GoldData/GoldDaily').subscribe(result => {
