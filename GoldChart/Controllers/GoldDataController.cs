@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Net.Http;
-using System.Runtime.Serialization;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -16,97 +12,58 @@ namespace GoldChart.Controllers
     public class GoldDataController : ControllerBase
     {
         [HttpGet("[action]")]
-        public IEnumerable<WeatherForecast> WeatherForecasts()
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                DateFormatted = DateTime.Now.AddDays(index).ToString("d"),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            });
-        }
-
-        [HttpGet("[action]")]
         public string GoldDaily()
         {
+            var task = GetGoldDataDaily();
+
+            task.Wait();
+
+            var goldDataDaily = task.Result;
             var gold = new Gold
             {
-                goldData = new List<GoldDataDay>()
-                //{
-                //    new GoldDataDay
-                //    {
-                //        Date = "2010-6-29",
-                //        Open = (float)15.89
-                //    },
-                //    new GoldDataDay
-                //    {
-                //        Date = "2010-6-30",
-                //        Open = (float)25.73
-                //    }
-                //}
+                goldData = Gold.GetGoldDataDaily(goldDataDaily)
             };
 
-            var task = GetAll2Async();
-            task.Wait();
-            var allPrices = task.Result;
-
-            //var allPrices = GetAll();
-
-            foreach (var g in allPrices)
-            {
-                var array = g.Split(',');
-                var r = float.TryParse(array[1], NumberStyles.Any, CultureInfo.InvariantCulture, out var f);
-
-                gold.goldData.Add(new GoldDataDay
-                {
-                    Date = array[0],
-                    Open = f
-                });
-            }
-
-            var s = JsonConvert.SerializeObject(gold, Formatting.None);
-
-            return s;
+            return JsonConvert.SerializeObject(gold, Formatting.None);
         }
 
-        private async Task<IEnumerable<string>> GetAll2Async()
+        private async Task<Dictionary<DateTime, double>> GetGoldDataDaily()
         {
-            var list = new List<string>();
-
             var client = HttpClientFactory.Create();
             var httpResponse = await client.GetAsync("https://localhost:44350/api/Gold");
             var body = await httpResponse.Content.ReadAsStringAsync();
-            var b = ushort.TryParse(body, out var id);
+            var isRequestIdValid = ushort.TryParse(body, out var requestId);
 
-            if (!b) return null;
+            if (!isRequestIdValid) return null;
 
             System.Threading.Thread.Sleep(3000);
 
-            var httpResponse2 = await client.GetAsync("https://localhost:44350/api/Gold/GetAll/" + id.ToString());
-            var body2 = await httpResponse2.Content.ReadAsStringAsync();
+            var httpResponse2 = await client.GetAsync("https://localhost:44350/api/Gold/GetAll/" + requestId.ToString());
+            var goldDataDaily = await httpResponse2.Content.ReadAsStringAsync();
 
-            
-            var r = JsonConvert.DeserializeObject<string[]>(body2);
-
-            return r;
-        }
-
-        private IEnumerable<string> GetAll()
-        {
-            var list = new List<string>
-            {
-                "2010-6-29,15.9",
-                "2010-6-30,25.9"
-            };
-
-            return list;
+            return JsonConvert.DeserializeObject<Dictionary<DateTime, double>>(goldDataDaily);
         }
 
         internal class Gold
         {
             [JsonProperty("goldData")]
             internal List<GoldDataDay> goldData;
+
+            internal static List<GoldDataDay> GetGoldDataDaily(Dictionary<DateTime, double> goldDataDaily)
+            {
+                var goldData = new List<GoldDataDay>();
+
+                foreach (var g in goldDataDaily)
+                {
+                    goldData.Add(new GoldDataDay
+                    {
+                        Date = g.Key.ToString("yyyy-M-d"),
+                        Open = g.Value
+                    });
+                }
+
+                return goldData;
+            }
         }
 
         internal class GoldDataDay
@@ -115,59 +72,7 @@ namespace GoldChart.Controllers
             internal string Date;
 
             [JsonProperty("Open")]
-            internal float Open;
-        }
-
-        //// GET: api/GoldData
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        //// GET: api/GoldData/5
-        //[HttpGet("{id}", Name = "Get")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        //// POST: api/GoldData
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-
-        //// PUT: api/GoldData/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE: api/ApiWithActions/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
-
-        private static string[] Summaries = new[]
-{
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        public class WeatherForecast
-        {
-            public string DateFormatted { get; set; }
-            public int TemperatureC { get; set; }
-            public string Summary { get; set; }
-
-            public int TemperatureF
-            {
-                get
-                {
-                    return 32 + (int)(TemperatureC / 0.5556);
-                }
-            }
+            internal double Open;
         }
     }
 }

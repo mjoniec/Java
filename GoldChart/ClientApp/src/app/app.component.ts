@@ -7,22 +7,13 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class AppComponent {
-    public forecasts: WeatherForecast[];
     _goldData: string;
-    _data = { "goldData": [{ "Date": "2010-6-29", "Open": 15.89 }, { "Date": "2010-6-30", "Open": 25.73 }] };
+    _data = { "goldData": [{ "Date": "1971-4-1", "Open": 15.89 }, { "Date": "2019-4-5", "Open": 25.73 }] };
 
     constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-
-        console.log("qqq constructor");
-
         http.get<string>(baseUrl + 'api/GoldData/GoldDaily').subscribe(result => {
             this._goldData = result;
-            console.log(this._goldData);
-            console.log("qqq get finishes");
-        }, error => console.error(error));
-
-        http.get<WeatherForecast[]>(baseUrl + 'api/GoldData/WeatherForecasts').subscribe(result => {
-            this.forecasts = result;
+            console.log("gold data source assigned to chart");
         }, error => console.error(error));
     }
 
@@ -33,9 +24,7 @@ export class AppComponent {
                 { name: 'Date' },
                 { name: 'Open' }
             ],
-            localdata: null/*this._goldData*/
-            //url: '../assets/TSLA_stockprice.json'
-            //type: "GET",
+            localdata: null
         };
     getWidth(): any {
         if (document.body.offsetWidth < 850) {
@@ -47,16 +36,6 @@ export class AppComponent {
 
     dataAdapter: any = new jqx.dataAdapter(this.source, {
         loadComplete: function () {
-            console.log("eeeee data adapter load complete");
-            console.log(this._goldData);
-            //this._http.get<string>(this._url).subscribe(result => {
-            //    this._goldData = result;
-            //    console.log(this._goldData);
-            //    this.source.localdata = this._goldData;
-            //}, error => console.error(error));
-
-            //undefined
-            //this.source.localdata = this._goldData;
         },
         async: true,
         autoBind: true,
@@ -79,8 +58,8 @@ export class AppComponent {
     xAxis: any =
         {
             dataField: 'Date',
-            minValue: new Date(2012, 0, 1),
-            maxValue: new Date(2013, 11, 31),
+            minValue: new Date(1971, 4, 1),
+            maxValue: new Date(2019, 4, 5),
             type: 'date',
             baseUnit: 'day',
             labels:
@@ -129,11 +108,4 @@ export class AppComponent {
             this.dataAdapter.dataBind();
         }
     }
-}
-
-interface WeatherForecast {
-    dateFormatted: string;
-    temperatureC: number;
-    temperatureF: number;
-    summary: string;
 }
