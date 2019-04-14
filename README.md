@@ -1,95 +1,40 @@
 # GoldFrontend
 
-Angular application hosted on .NET Core for displaying daily gold prices chart
+Angular application hosted on .NET Core for displaying daily gold prices chart. It is a client to Gold Service Rest Api prividing daily gold prices. 
 
-## Getting Started
+## Getting Started - how to run on localhost
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+1. run backend: https://github.com/mjoniec/GoldBackend/edit/master/README.md
+2. Open project in VS and run
 
-### Prerequisites
+
+## Prerequisites
 
 What you need to install before run the software
 
-```
-.NET Core
+- .NET Core
+- node.js and npm
+- jqx
+- "#" can not be in local path else angular app will not launch
+
+
+## Installing
 
 Node.js, npm
 https://nodejs.org/en/download/
+
+https://www.jqwidgets.com/angular-components-documentation/documentation/create-jqwidgets-angular-app/index.htm
 
 jqx
 npm install -g create-jqwidgets-angular-app
 https://www.jqwidgets.com/jquery-widgets-documentation/documentation/package-managers/npm-tutorial.htm
 
-"#" can not be in local path else angular app will not launch
-
-```
-
-### Installing
-
-https://www.jqwidgets.com/angular-components-documentation/documentation/create-jqwidgets-angular-app/index.htm
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+To be deployed on azure
 
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* **Marcin Joniec** - *All contributions*
