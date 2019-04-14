@@ -12,7 +12,11 @@ export class AppComponent {
     constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
         http.get<string>(baseUrl + 'api/GoldData/GoldDaily').subscribe(result => {
             this._goldData = result;
-            console.log("gold data source assigned to chart");
+            if (this.source.localdata == null) {
+                this.source.localdata = this._goldData;
+                this.dataAdapter.dataBind();
+                console.log("gold data source assigned to chart");
+            }
         }, error => console.error(error));
     }
 
@@ -57,8 +61,8 @@ export class AppComponent {
     xAxis: any =
         {
             dataField: 'Date',
-            minValue: new Date(1971, 4, 1),
-            maxValue: new Date(2019, 4, 5),
+            minValue: new Date(2011, 4, 1),
+            maxValue: new Date(2016, 4, 5),
             type: 'date',
             baseUnit: 'day',
             labels:
