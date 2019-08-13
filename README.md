@@ -4,8 +4,8 @@ Angular application hosted on .NET Core for displaying daily gold prices chart. 
 
 ## Getting Started - how to run on localhost
 
-1. run backend: https://github.com/mjoniec/GoldBackend/edit/master/README.md
-2. Open project in VS and run
+1. have backend running: https://github.com/mjoniec/GoldBackend/edit/master/README.md
+2. Open this project in VS and run
 
 
 ## Prerequisites
