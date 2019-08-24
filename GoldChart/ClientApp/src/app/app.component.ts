@@ -25,7 +25,7 @@ export class AppComponent {
             datatype: 'json',
             datafields: [
                 { name: 'Date' },
-                { name: 'Open' }
+                { name: 'Price' }
             ],
             localdata: null
         };
@@ -51,7 +51,7 @@ export class AppComponent {
         let dataItem = this.dataAdapter.records[itemIndex];
         return '<DIV style="text-align:left"><b>Date: ' +
             categoryValue.getDate() + '-' + this.months[categoryValue.getMonth()] + '-' + categoryValue.getFullYear() +
-            '</b><br />Open price: $' + dataItem.Open +
+            '</b><br />Price: $' + dataItem.Price +
             '</b><br />Close price: $' + dataItem.Close +
             '</b><br />Daily volume: ' + dataItem.Volume +
             '</DIV>';
@@ -76,7 +76,7 @@ export class AppComponent {
                 padding: { /*left: 0, right: 0,*/top: 0, bottom: 0 },
                 minValue: new Date(2010, 5, 1),
                 backgroundColor: 'white',
-                dataField: 'Open',
+                dataField: 'Price',
                 baseUnit: 'month',
                 gridLines: { visible: false },
                 serieType: 'area',
@@ -98,7 +98,7 @@ export class AppComponent {
                 type: 'line',
                 toolTipFormatFunction: this.toolTipCustomFormatFn,
                 series: [
-                    { dataField: 'Open', displayText: 'Open Price', lineWidth: 1, lineWidthSelected: 1 }
+                    { dataField: 'Price', displayText: 'Price', lineWidth: 1, lineWidthSelected: 1 }
                 ]
             }
         ];
