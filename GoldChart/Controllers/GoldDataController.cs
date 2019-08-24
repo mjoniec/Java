@@ -24,7 +24,7 @@ namespace GoldChart.Controllers
         private async Task<GoldPrices> GetGoldDataDaily()
         {
             var client = HttpClientFactory.Create();
-            var httpResponse = await client.GetAsync("https://localhost:5001/Gold/GetDataPrepared");
+            var httpResponse = await client.GetAsync("https://localhost:44350/Gold/GetDataPrepared");
             var body = await httpResponse.Content.ReadAsStringAsync();
             var isRequestIdValid = ushort.TryParse(body, out var requestId);
 
@@ -32,7 +32,7 @@ namespace GoldChart.Controllers
 
             System.Threading.Thread.Sleep(3000);
 
-            var httpResponse2 = await client.GetAsync("https://localhost:5001/Gold/GetData/" + requestId);
+            var httpResponse2 = await client.GetAsync("https://localhost:44350/Gold/GetData/" + requestId);
             var goldPrices = await httpResponse2.Content.ReadAsAsync<GoldPrices>();
 
             return goldPrices;
