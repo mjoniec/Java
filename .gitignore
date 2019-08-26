@@ -7,3 +7,4 @@
 /GoldChart/my-app/node_modules
 /GoldChart/ClientApp/node_modules
 /.vs/GoldFrontend
+/GoldChart/ClientApp/dist
