@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Net.Http;
-using System.Reflection;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Data.Model.Common;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +9,8 @@ namespace GoldChart.Controllers
     [ApiController]
     public class GoldDataController : ControllerBase
     {
+        private const string BackupGoldPricesStaticResourceName = "GoldPricesExampleFrontendBackup.json";
+
         [HttpGet("[action]")]
         public string GoldDaily()
         {
@@ -64,7 +64,7 @@ namespace GoldChart.Controllers
         private async Task<GoldPrices> GetGoldPricesFromBackup()
         {
             var client = HttpClientFactory.Create();
-            var httpResponse = await client.GetAsync("http://localhost:50132/GoldPricesExampleFrontendBackup.json");
+            var httpResponse = await client.GetAsync($"{Request.Scheme}://{Request.Host.Value}/{BackupGoldPricesStaticResourceName}");
             var goldPrices = await httpResponse.Content.ReadAsAsync<GoldPrices>();
 
             return goldPrices;
