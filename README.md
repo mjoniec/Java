@@ -31,8 +31,16 @@ https://www.jqwidgets.com/jquery-widgets-documentation/documentation/package-man
 
 
 ## Deployment
+Deployed on azure
 
-To be deployed on azure
+Angular SPA
+http://goldprices.azurewebsites.net/
+
+REST API
+http://goldprices.azurewebsites.net/api/GoldData/GoldDaily
+
+Static resource
+http://goldprices.azurewebsites.net/GoldPricesExampleFrontendBackup.json
 
 
 ## Authors
