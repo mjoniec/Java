@@ -89,7 +89,7 @@ export class AppComponent {
         };
     valueAxis: any =
         {
-            title: { text: 'Price per share [USD]<br><br>' },
+            title: { text: 'Price per ounce [AUD]<br><br>' },
             labels: { horizontalAlignment: 'right' }
         };
     seriesGroups =
