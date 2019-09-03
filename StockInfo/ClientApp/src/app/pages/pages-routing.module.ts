@@ -4,12 +4,17 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ECommerceComponent } from './e-commerce/e-commerce.component';
+import { GoldComponent } from './gold/gold.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
+    {
+      path: 'gold',
+      component: GoldComponent,
+    },
     {
       path: 'dashboard',
       component: ECommerceComponent,
