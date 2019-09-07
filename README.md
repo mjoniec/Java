@@ -1,5 +1,7 @@
 # GoldFrontend
 
+http://goldprices.azurewebsites.net/
+
 Angular application hosted on .NET Core for displaying daily gold prices chart. It is a client to Gold Service Rest Api prividing daily gold prices. 
 
 ## Getting Started - how to run on localhost
