@@ -4,6 +4,10 @@ http://goldprices.azurewebsites.net/
 
 Angular application hosted on .NET Core for displaying daily gold prices chart. It is a client to Gold Service Rest Api prividing daily gold prices. 
 
+http://goldandcurrencies.azurewebsites.net
+
+Angular application hosted on .NET Core based on a free model. Planned to be used to display variuos financial data, currencies exchange rates, gold prices in various currencies.  
+
 ## Getting Started - how to run on localhost
 
 1. have backend running: https://github.com/mjoniec/GoldBackend/edit/master/README.md
