@@ -1,54 +1,20 @@
-# GoldFrontend
-
-http://goldprices.azurewebsites.net/
-
-Angular application hosted on .NET Core for displaying daily gold prices chart. It is a client to Gold Service Rest Api prividing daily gold prices. 
-
-http://goldandcurrencies.azurewebsites.net
-
-Angular application hosted on .NET Core based on a free model. Planned to be used to display variuos financial data, currencies exchange rates, gold prices in various currencies.  
-
-## Getting Started - how to run on localhost
-
-1. have backend running: https://github.com/mjoniec/GoldBackend/edit/master/README.md
-2. Open this project in VS and run
+# Java - Backend service to facilitate: 
 
 
-## Prerequisites
+•	Spring, Http Api
+•	Some middleware equivalent In Java? Spring layers vs DDD - https://www.petrikainulainen.net/software-development/design/the-biggest-flaw-of-spring-web-applications/
+•	Docker
 
-What you need to install before run the software
+•	template hateoas?
+•	Reverse Proxy
+•	Cookies
 
-- .NET Core
-- node.js and npm
-- jqx
-- "#" can not be in local path else angular app will not launch
+•	Logon? Cookie? Different storage?
+•	Sth for auto implementing ORM interface? Useful with logon?
 
-
-## Installing
-
-Node.js, npm
-https://nodejs.org/en/download/
-
-https://www.jqwidgets.com/angular-components-documentation/documentation/create-jqwidgets-angular-app/index.htm
-
-jqx
-npm install -g create-jqwidgets-angular-app
-https://www.jqwidgets.com/jquery-widgets-documentation/documentation/package-managers/npm-tutorial.htm
+•	JWT, Jwt bearer
+•	SSO – Single sign-on
+•	OIDC - Open ID Connect
+•	Auth, OAuth 2.0 (some spring template for client / server)
 
 
-## Deployment
-Deployed on azure
-
-Angular SPA
-http://goldprices.azurewebsites.net/
-
-REST API
-http://goldprices.azurewebsites.net/api/GoldData/GoldDaily
-
-Static resource
-http://goldprices.azurewebsites.net/GoldPricesExampleFrontendBackup.json
-
-
-## Authors
-
-* **Marcin Joniec** - *All contributions*
