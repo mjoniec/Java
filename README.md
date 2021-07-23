@@ -1,6 +1,6 @@
 Think on business purpose of this project ...
 
-# 1. Backend technology agnostic experience - Java instead of Net
+# 1. Technology agnostic backend architect experience - Java instead of Net
 
 - Spring, Http Api, SpringHttpApi_HelloWorld
 - run in cmd: mvnw spring-boot:run
@@ -16,10 +16,3 @@ Think on business purpose of this project ...
 -	OIDC - Open ID Connect
 -	Auth, OAuth 2.0 (I saw some spring template for client / server)
 - Cookies
-
-# 3. DDD + architecture
-
-- design bounded context, use proper domain object, entity and value object
-- use some patterns - creational, structural, behavioral
-- see on unfinished homeworks from dna course 
-
